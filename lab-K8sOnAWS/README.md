@@ -4,6 +4,30 @@ Dự án này tự động hóa hoàn toàn việc triển khai một cụm Kube
 
 ---
 
+## 📁 Cấu Trúc Dự Án (Project Structure)
+
+Dự án được cấu trúc theo tiêu chuẩn thiết kế module chuyên nghiệp:
+
+```
+lab-K8sOnAWS/
+├── .gitignore          # Cấu hình bỏ qua các file nhạy cảm (như key .pem, state file) khi đẩy lên Git
+├── providers.tf        # Khai báo các Terraform providers (AWS, TLS, Local) và phiên bản yêu cầu
+├── variables.tf        # Định nghĩa các tham số đầu vào cấu hình (Region, cấu hình EC2, Disk size)
+├── outputs.tf          # Định nghĩa dữ liệu đầu ra (Link truy cập ALB URL, IP của EC2)
+├── network.tf          # Truy vấn thông tin VPC và Subnets mặc định từ AWS
+├── security.tf         # Thiết lập các nhóm bảo mật (Security Groups) cho ALB và EC2
+├── compute.tf          # Triển khai SSH Key và máy ảo EC2 (tích hợp script cài đặt tự động)
+├── load_balancer.tf    # Triển khai ALB, Target Group cổng 30000 và Listener cổng 80
+├── README.md           # Hướng dẫn chạy dự án, luồng dữ liệu và cấu trúc dự án
+├── EXPLAINER.md        # Tài liệu hướng dẫn tự học chi tiết, giải nghĩa thuật ngữ và cẩm nang sửa lỗi
+├── k8s/
+│   └── app.yaml        # Khai báo Kubernetes (ConfigMap tùy biến HTML, Deployment Nginx, Service NodePort)
+└── scripts/
+    └── bootstrap.sh    # Script tự động chạy trên EC2 (cài Docker, cài Minikube, Kubectl và deploy ứng dụng)
+```
+
+---
+
 ## 🏗️ Sơ đồ Kiến trúc & Luồng Dữ liệu (Traffic Flow)
 
 ```mermaid
