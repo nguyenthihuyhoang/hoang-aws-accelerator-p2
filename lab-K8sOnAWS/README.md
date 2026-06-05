@@ -30,19 +30,7 @@ lab-K8sOnAWS/
 
 ## 🏗️ Sơ đồ Kiến trúc & Luồng Dữ liệu (Traffic Flow)
 
-```mermaid
-graph TD
-    Client[Người dùng từ Internet] -->|HTTP Port 80| ALB[AWS Application Load Balancer]
-    ALB -->|Target Group Port 30000| EC2[AWS EC2 Instance: Host OS]
-    subgraph EC2 Instance (t3.medium)
-        direction TB
-        HostPort[Port 30000 on Host] -->|Docker Port Mapping| Minikube[Minikube Container: Control Plane]
-        subgraph Minikube Cluster
-            Minikube -->|Service NodePort 30000| Service[Kubernetes Service: web-svc]
-            Service -->|Load Balance| Pods[Nginx Pods: 2 Replicas]
-        end
-    end
-```
+![demo](image.png)
 
 ### Chi tiết luồng đi của request:
 1. **Client** gửi request HTTP đến DNS của **ALB** ở cổng `80`.
