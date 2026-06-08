@@ -1,1 +1,0 @@
-# hoang-aws-accelerator-p2
