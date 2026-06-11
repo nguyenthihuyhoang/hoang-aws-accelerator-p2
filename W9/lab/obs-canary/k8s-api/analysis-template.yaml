@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: api-success-rate
+  namespace: demo
+spec:
+  metrics:
+    - name: success-rate
+      interval: 30s
+      successCondition: result >= 0.95
+      failureLimit: 3
+      provider:
+        prometheus:
+          address: http://prometheus:9090
+          query: sum(rate(req{status!~"5.."}[2m])) / sum(rate(req[2m]))
