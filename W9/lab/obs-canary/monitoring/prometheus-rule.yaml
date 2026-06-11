@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: w9-api-slo
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: w9.api.rules
+      rules:
+        - alert: W9ApiHighErrorRate
+          expr: |
+            sum(rate(w9_api_requests_total{namespace="demo",status=~"5.."}[5m]))
+            /
+            sum(rate(w9_api_requests_total{namespace="demo"}[5m]))
+            > 0.05
+          for: 5m
+          labels:
+            severity: critical
+            service: api
+          annotations:
+            summary: "API error rate is above 5%"
+            description: "The API in namespace demo has been returning 5xx responses above the allowed threshold."

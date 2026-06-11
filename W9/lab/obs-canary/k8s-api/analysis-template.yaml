@@ -12,4 +12,4 @@ spec:
       provider:
         prometheus:
           address: http://prometheus:9090
-          query: sum(rate(req{status!~"5.."}[2m])) / sum(rate(req[2m]))
+          query: sum(rate(w9_api_requests_total{namespace="demo",status!~"5.."}[2m])) / sum(rate(w9_api_requests_total{namespace="demo"}[2m]))
