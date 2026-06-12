@@ -24,7 +24,7 @@ spec:
               containerPort: 8080
           env:
             - name: ERROR_RATE
-              value: "1"
+              value: "0"
             - name: VERSION
               value: "v3"
           readinessProbe:
@@ -38,8 +38,8 @@ spec:
         - pause:
             duration: 10s
         # - analysis:
-            # templates:
-              # - templateName: api-success-rate
+        #     templates:
+        #       - templateName: api-success-rate
         - setWeight: 50
         - pause: 
             duration: 10s
