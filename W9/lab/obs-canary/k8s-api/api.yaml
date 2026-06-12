@@ -40,7 +40,8 @@ spec:
             templates:
               - templateName: api-success-rate
         - setWeight: 50
-        - pause: { duration: 30s }
+        - pause: 
+          duration: 10s
         - setWeight: 100
 ---
 apiVersion: v1
