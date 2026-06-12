@@ -18,12 +18,12 @@ spec:
   receivers:
     - name: mentor-email
       emailConfigs:
-        - to: mentor@example.com
-          from: w9@example.com
-          smarthost: smtp.example.com:587
+        - to: nguyenthihuyhoang1104@gmail.com
+          from: hoangnth.22git@vku.udn.vn
+          smarthost: smtp.gmail.com:587
           requireTLS: true
           sendResolved: true
-          authUsername: w9@example.com
+          authUsername: hoangnth.22git@vku.udn.vn
           authPassword:
             name: alertmanager-smtp
-            key: password
+            key: tvmmxqzktsiqtvkf
