@@ -56,5 +56,5 @@ Ghi lại bằng chứng
 - Lưu screenshot của email subscription confirmation (đặt trong `screenshots/`).
 - Lưu screenshot của CloudWatch Alarm state -> `ALARM`.
 ![alt text](<screenshots/email subscription confirmation.png>)
-![alt text](screenshots/email confirmed console.png)
+![alt text](<screenshots/email confirmed console.png>)
 ![alt text](screenshots/cpu-high.png)
