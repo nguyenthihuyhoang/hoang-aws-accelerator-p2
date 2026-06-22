@@ -1,0 +1,31 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8snoimagewithlatest
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sNoImageWithLatest
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8snoimagewithlatest
+
+        violation[{
+          "msg": msg
+        }] {
+          image := containerImage
+          tag := split(image, ":")
+          last := tag[count(tag)-1]
+          last == "latest"
+          msg := sprintf("Image tag :latest is forbidden: %v", [image])
+        }
+
+        containerImage := c.image {
+          c := input.review.object.spec.template.spec.containers[_]
+        }
+
+        containerImage := c.image {
+          c := input.review.object.spec.containers[_]
+        }

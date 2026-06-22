@@ -1,0 +1,6 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sNoHostNetwork
+metadata:
+  name: deny-hostnetwork
+spec:
+  enforcementAction: deny
