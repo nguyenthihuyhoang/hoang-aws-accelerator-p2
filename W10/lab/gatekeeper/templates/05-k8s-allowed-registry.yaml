@@ -1,0 +1,41 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sallowedregistry
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sAllowedRegistry
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            allowedRegistries:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sallowedregistry
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          image := container.image
+          allowed := input.parameters.allowedRegistries
+          not is_allowed(image, allowed)
+          msg := sprintf("container <%v> has disallowed registry <%v>, allowed registries: %v", [container.name, image, allowed])
+        }
+
+        input_containers[c] {
+          c := input.review.object.spec.containers[_]
+        }
+        input_containers[c] {
+          c := input.review.object.spec.initContainers[_]
+        }
+
+        is_allowed(image, allowed) {
+          registry := allowed[_]
+          startswith(image, registry)
+        }

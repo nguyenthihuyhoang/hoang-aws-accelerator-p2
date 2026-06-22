@@ -1,0 +1,97 @@
+# 1. Pod violating latest tag rule
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-latest-tag-violation
+  namespace: demo
+spec:
+  containers:
+  - name: test-app
+    image: ghcr.io/nguyenthihuyhoang/app:latest
+    resources:
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+    securityContext:
+      runAsUser: 1000
+---
+# 2. Pod violating resource limits rule
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-missing-limits-violation
+  namespace: demo
+spec:
+  containers:
+  - name: test-app
+    image: ghcr.io/nguyenthihuyhoang/app:1.0.0
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+    securityContext:
+      runAsUser: 1000
+---
+# 3. Pod violating runAsUser: 0 rule
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-root-user-violation
+  namespace: demo
+spec:
+  containers:
+  - name: test-app
+    image: ghcr.io/nguyenthihuyhoang/app:1.0.0
+    resources:
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+    securityContext:
+      runAsUser: 0
+---
+# 4. Pod violating hostNetwork rule
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-hostnetwork-violation
+  namespace: demo
+spec:
+  hostNetwork: true
+  containers:
+  - name: test-app
+    image: ghcr.io/nguyenthihuyhoang/app:1.0.0
+    resources:
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+    securityContext:
+      runAsUser: 1000
+---
+# 5. Pod violating registry whitelist rule
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-registry-violation
+  namespace: demo
+spec:
+  containers:
+  - name: test-app
+    image: docker.io/nginx:1.25.3
+    resources:
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+    securityContext:
+      runAsUser: 1000

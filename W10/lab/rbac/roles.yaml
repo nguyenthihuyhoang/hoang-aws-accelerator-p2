@@ -1,0 +1,44 @@
+# Role for alice (developer in namespace demo)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+  namespace: demo
+rules:
+- apiGroups: ["", "apps", "batch", "networking.k8s.io"]
+  resources:
+    - pods
+    - pods/log
+    - pods/exec
+    - services
+    - deployments
+    - replicasets
+    - statefulsets
+    - daemonsets
+    - jobs
+    - cronjobs
+    - ingresses
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+# ClusterRole for bob (sre)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sre
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log", "pods/exec"]
+  verbs: ["get", "list", "watch", "delete"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "deployments/scale", "statefulsets", "statefulsets/scale", "replicasets", "replicasets/scale"]
+  verbs: ["get", "list", "watch", "update", "patch"]
+---
+# ClusterRole for carol (viewer)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: viewer
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]

@@ -1,0 +1,15 @@
+apiVersion: policy.sigstore.dev/v1beta1
+kind: ClusterImagePolicy
+metadata:
+  name: image-signature-policy
+spec:
+  images:
+    - glob: "ghcr.io/nguyenthihuyhoang/**"
+  authorities:
+    - key:
+        data: |
+          -----BEGIN PUBLIC KEY-----
+          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmz1w2yC34yK2Jc88hZ83+3yV309Z
+          d1v1zV1Zt1v1zV1Zt1v1zV1Zt1v1zV1Zt1v1zV1Zt1v1zV1Zt1v1zV1Zt1v1zV1Z
+          t1v1zV1Zt1v1zQ==
+          -----END PUBLIC KEY-----
