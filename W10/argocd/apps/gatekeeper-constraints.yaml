@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/<your-org>/<your-repo>.git'
+    repoURL: 'https://github.com/nguyenthihuyhoang/hoang-aws-accelerator-p2.git'
     targetRevision: HEAD
-    path: 'lab1/gatekeeper'
+    path: W10/lab1/gatekeeper
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: gatekeeper-system
