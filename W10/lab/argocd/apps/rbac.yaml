@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/nguyenthihuyhoang/hoang-aws-accelerator-p2.git
     targetRevision: HEAD
-    path: lab/rbac
+    path: W10/lab/rbac
   destination:
     server: https://kubernetes.default.svc
     namespace: demo
@@ -16,4 +16,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    createNamespace: true
+    syncOptions:
+      - CreateNamespace=true

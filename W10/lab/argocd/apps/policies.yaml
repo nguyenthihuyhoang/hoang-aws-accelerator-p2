@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/nguyenthihuyhoang/hoang-aws-accelerator-p2.git
     targetRevision: HEAD
-    path: lab/policies
+    path: W10/lab/policies
   destination:
     server: https://kubernetes.default.svc
     namespace: cosign-system

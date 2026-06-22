@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/nguyenthihuyhoang/hoang-aws-accelerator-p2.git
     targetRevision: HEAD
-    path: lab/gatekeeper/templates
+    path: W10/lab/gatekeeper/templates
   destination:
     server: https://kubernetes.default.svc
     namespace: gatekeeper-system
