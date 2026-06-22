@@ -75,7 +75,7 @@
 
 > `--as` là impersonation (admin giả lập user) — đủ để chấm authorization, chưa cần authentication thật.
 
-![Lab 1.1 — RBAC auth can-i](img/w10-morning-lab1.1.png)
+![Lab 1.1 — RBAC auth can-i](image/w10-morning-lab1.1.png)
 
 ---
 
@@ -113,20 +113,8 @@ wave 2 → gatekeeper-constraints  (4 Constraint, enforcementAction: deny)
 | Pod `hostNetwork: true`                    | reject  | ✅       |
 | Pod hợp lệ (pinned + limits + non-root)    | pass    | ✅       |
 
-<!-- 🖼️ PLACEHOLDER ẢNH 1 -->
-![Lab 1.2 — Test latest tag reject](img/w10-morning-lab1.2-test-latest.png)
+![Lab 1.2 — Test reject&pass](image/w10-morning-lab1.2.png)
 
-<!-- 🖼️ PLACEHOLDER ẢNH 2 -->
-![Lab 1.2 — Test resource limits reject](img/w10-morning-lab1.2-test-resource-limits.png)
-
-<!-- 🖼️ PLACEHOLDER ẢNH 3 -->
-![Lab 1.2 — Test runAsUser reject](img/w10-morning-lab1.2-test-runAsUser.png)
-
-<!-- 🖼️ PLACEHOLDER ẢNH 4 -->
-![Lab 1.2 — Test hostNetwork reject](img/w10-morning-lab1.2-test-hostNetwork.png)
-
-<!-- 🖼️ PLACEHOLDER ẢNH 5 -->
-![Lab 1.2 — Test valid pod pass](img/w10-morning-lab1.2-test-pass.png)
 
 ---
 
@@ -146,8 +134,7 @@ Chặn tất cả image không xuất phát từ `ghcr.io/nguyenthihuyhoang/`. C
 | Pod image `docker.io/nginx:1.25.3`      | reject  | ✅       |
 | Pod image `ghcr.io/nguyenthihuyhoang/<app>:*`      | pass    | ✅       |
 
-<!-- 🖼️ PLACEHOLDER ẢNH -->
-![Lab 1.3 — ConstraintTemplate allowed-registry](img/w10-morning-lab1.3-allowed-registry.png)
+![Lab 1.3 — ConstraintTemplate allowed-registry](image/w10-morning-lab1.3-allowed-registry.png)
 
 ---
 
@@ -175,11 +162,11 @@ wave 1 → eso-config   (SecretStore + ExternalSecret)
 | `kubectl get pod` sau khi rotate                  | AGE không đổi (no restart)  | ✅       |
 | `grep -ri password` trong repo                   | không có secret thật        | ✅       |
 
-<!-- 🖼️ PLACEHOLDER ẢNH 1 -->
-![Lab 2.1 — SecretStore + ExternalSecret Synced trên ArgoCD](img/w10-afternoon-lab2.1-synced.png)
 
-<!-- 🖼️ PLACEHOLDER ẢNH 3 -->
-![Lab 2.1 — Đổi value trên AWS, Secret cập nhật < 60s](img/w10-afternoon-lab2.1-rotate.png)
+![Lab 2.1 — SecretStore + ExternalSecret Synced trên ArgoCD](image/w10-afternoon-lab2.1-synced.png)
+
+
+![Lab 2.1 — Đổi value trên AWS, Secret cập nhật < 60s](image/w10-afternoon-lab2.1-rotate.png)
 
 
 ---
@@ -224,23 +211,9 @@ Cluster (Admission)
 
 > CVE mà vendor chưa fix → không block mãi: ghi exception ADR có thời hạn (xem `runbooks/`).
 
-**CI xanh + image đã ký:**
-
-<!-- 🖼️ PLACEHOLDER ẢNH -->
-![Lab 2.2 — GitHub Actions run success](img/w10-afternoon-lab2.2-ci-run.png)
-
-<!-- 🖼️ PLACEHOLDER ẢNH -->
-![Lab 2.2 — CI xanh + image signed](img/w10-afternoon-lab2.2-ci-signed.png)
-
-**Admission reject image chưa ký:**
-
-<!-- 🖼️ PLACEHOLDER ẢNH -->
-![Lab 2.2 — Admission reject unsigned image](img/w10-afternoon-lab2.2-admission-reject.png)
-
 **Policy Controller + Policies Healthy trên ArgoCD:**
 
-<!-- 🖼️ PLACEHOLDER ẢNH -->
-![Lab 2.2 — Policy controller and policies healthy](img/w10-afternoon-lab2.2-policy-controller-healthy.png)
+![Lab 2.2 — Policy controller and policies healthy](image/w10-afternoon-lab2.2-policy-controller-healthy.png)
 
 ---
 
